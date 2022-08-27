@@ -33,17 +33,26 @@
                                     <action selector="joinRoom:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G7D-E1-us0"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching Available Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bs3-kk-cM9">
+                                <rect key="frame" x="109" y="777" width="196" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="FsU-ma-KHj" firstAttribute="top" secondItem="hkP-IM-ZXD" secondAttribute="bottom" constant="36" id="2IM-Eb-JH6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bs3-kk-cM9" secondAttribute="bottom" constant="64" id="DEg-fF-ll4"/>
                             <constraint firstItem="hkP-IM-ZXD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Tpf-6s-57C"/>
                             <constraint firstItem="FsU-ma-KHj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Voi-LK-avk"/>
                             <constraint firstItem="hkP-IM-ZXD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aGx-q1-YUH"/>
+                            <constraint firstItem="bs3-kk-cM9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qnI-JN-aI8"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchingLabel" destination="bs3-kk-cM9" id="9uM-7b-xqH"/>
                         <segue destination="9IM-70-0qw" kind="presentation" identifier="goToGame" modalPresentationStyle="fullScreen" id="noB-jW-igl"/>
                     </connections>
                 </viewController>
@@ -77,8 +86,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GpP-oU-vAc">
-                                <rect key="frame" x="215" y="815" width="183" height="47"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GpP-oU-vAc">
+                                <rect key="frame" x="278" y="815" width="120" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="qYC-zR-yIs"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Done" buttonSize="large"/>
                                 <connections>
@@ -90,22 +102,43 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5k-RX-Bjj">
-                                <rect key="frame" x="16" y="815" width="191" height="47"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5k-RX-Bjj">
+                                <rect key="frame" x="16" y="815" width="120" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="qEp-LJ-r9q"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Erase" buttonSize="large"/>
                                 <connections>
                                     <action selector="eraseDescription:" destination="9IM-70-0qw" eventType="touchUpInside" id="Mrh-ui-bkt"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Online" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sEc-08-d7V">
+                                <rect key="frame" x="182.5" y="762" width="49" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyT-zY-56u">
+                                <rect key="frame" x="320" y="44" width="78" height="47"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Leave" buttonSize="large"/>
+                                <connections>
+                                    <action selector="leaveGame:" destination="9IM-70-0qw" eventType="touchUpInside" id="bF3-Wg-9z7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mH1-pO-mgK"/>
                         <color key="backgroundColor" name="BackgroundPrimaryColor"/>
                         <constraints>
+                            <constraint firstItem="mH1-pO-mgK" firstAttribute="trailing" secondItem="dyT-zY-56u" secondAttribute="trailing" constant="16" id="AwS-vb-t1a"/>
                             <constraint firstItem="mH1-pO-mgK" firstAttribute="trailing" secondItem="hQ6-FM-TB3" secondAttribute="trailing" constant="16" id="Ekp-0m-ZQ7"/>
                             <constraint firstItem="k6d-Sj-gTW" firstAttribute="top" secondItem="7bd-FD-SIF" secondAttribute="bottom" constant="64" id="FxA-B1-7o8"/>
                             <constraint firstItem="ejV-FS-EwL" firstAttribute="top" secondItem="mH1-pO-mgK" secondAttribute="top" constant="128" id="GCg-yv-gl9"/>
+                            <constraint firstItem="dyT-zY-56u" firstAttribute="top" secondItem="mH1-pO-mgK" secondAttribute="top" id="GQX-Mg-7Uv"/>
                             <constraint firstItem="ejV-FS-EwL" firstAttribute="centerX" secondItem="eAx-bF-dBZ" secondAttribute="centerX" id="JsH-CF-7wc"/>
+                            <constraint firstItem="sEc-08-d7V" firstAttribute="centerX" secondItem="eAx-bF-dBZ" secondAttribute="centerX" id="Lj2-Lv-RuF"/>
+                            <constraint firstItem="GpP-oU-vAc" firstAttribute="top" secondItem="sEc-08-d7V" secondAttribute="bottom" constant="32" id="M2B-jf-0Db"/>
                             <constraint firstItem="GpP-oU-vAc" firstAttribute="bottom" secondItem="mH1-pO-mgK" secondAttribute="bottom" id="UxD-FY-sWE"/>
                             <constraint firstItem="mH1-pO-mgK" firstAttribute="trailing" secondItem="GpP-oU-vAc" secondAttribute="trailing" constant="16" id="VwL-yq-Ev8"/>
                             <constraint firstItem="hQ6-FM-TB3" firstAttribute="leading" secondItem="mH1-pO-mgK" secondAttribute="leading" constant="16" id="Y4b-jV-6iq"/>
@@ -123,6 +156,7 @@
                     <connections>
                         <outlet property="descriptionTextField" destination="hQ6-FM-TB3" id="vMK-Ob-b4g"/>
                         <outlet property="hintLabel" destination="7bd-FD-SIF" id="AxD-9N-iqd"/>
+                        <outlet property="onlineLabel" destination="sEc-08-d7V" id="MvX-gA-6M7"/>
                         <outlet property="wordLabel" destination="k6d-Sj-gTW" id="OF7-bD-ySd"/>
                     </connections>
                 </viewController>

@@ -10,11 +10,14 @@ import GameKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var searchingLabel: UILabel!
+    
     var gameCenter = GameCenterHelper.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
         gameCenter.delegate = self
+        searchingLabel.isHidden = true
     }
     
     @IBAction func createRoom(_ sender: UIButton) {
@@ -22,6 +25,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func joinRoom(_ sender: UIButton) {
+        searchingLabel.isHidden = false
+        gameCenter.joinAvailableGame()
     }
 }
 
@@ -39,6 +44,7 @@ extension ViewController: GameCenterHelperDelegate {
     }
     
     func presentGame(_ gameCenter: GameCenterHelper, match: GKMatch?) {
+        searchingLabel.isHidden = true
         self.performSegue(withIdentifier: "goToGame", sender: match)
     }
 }

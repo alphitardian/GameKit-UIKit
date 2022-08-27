@@ -12,6 +12,7 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var hintLabel: UILabel!
     @IBOutlet weak var wordLabel: UILabel!
+    @IBOutlet weak var onlineLabel: UILabel!
     @IBOutlet weak var descriptionTextField: UITextField!
     
     var match: GKMatch?
@@ -36,10 +37,19 @@ class GameViewController: UIViewController {
         descriptionTextField.text = ""
     }
     
+    @IBAction func leaveGame(_ sender: Any) {
+        leaveCurrentGame()
+    }
+    
     func setupUI() {
         let word = Word.dataSource.randomElement()
         wordLabel.text = word?.word ?? ""
         hintLabel.text = word?.hint ?? ""
+    }
+    
+    func leaveCurrentGame() {
+        match?.disconnect()
+        dismiss(animated: true)
     }
     
     func presentAlert() {
@@ -49,8 +59,7 @@ class GameViewController: UIViewController {
             preferredStyle: .alert
         )
         let leaveGame = UIAlertAction(title: "Leave Game", style: .cancel) { _ in
-            self.match?.disconnect()
-            self.dismiss(animated: true)
+            self.leaveCurrentGame()
         }
         let closeAlert = UIAlertAction(title: "Close", style: .destructive)
         alert.addAction(leaveGame)
@@ -70,21 +79,30 @@ extension GameViewController: GKMatchDelegate {
     }
     
     // ngurusin state player
+    // lebih ke state player lawan, ngedeteksi online-offline, atau join
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
         print("Available player: \(String(match.expectedPlayerCount))")
         
         switch state {
         case .unknown:
-            print("unknown")
+            DispatchQueue.main.async {
+                self.onlineLabel.text = "Unknown"
+            }
         case .connected:
-            print("connected")
+            DispatchQueue.main.async {
+                self.onlineLabel.text = "\(player.displayName) Online"
+            }
         case .disconnected:
             // bisa kejadian kalo ga ada aktivitas
+            // bisa kejadian kalo tinggal sendirian di 1 room
             DispatchQueue.main.async {
+                self.onlineLabel.text = "\(player.displayName) Offline"
                 self.presentAlert()
             }
         @unknown default:
-            print("error")
+            DispatchQueue.main.async {
+                self.onlineLabel.text = "Error"
+            }
         }
     }
     

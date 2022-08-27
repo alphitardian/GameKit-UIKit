@@ -45,13 +45,30 @@ class GameCenterHelper: NSObject {
         }
         
         let request = GKMatchRequest()
-        request.defaultNumberOfPlayers = 2
+        request.minPlayers = 2
+        request.maxPlayers = 5
         request.inviteMessage = "Yuk main"
-        request.playerGroup = 2022
         
         let vc = GKMatchmakerViewController(matchRequest: request)!
         vc.matchmakerDelegate = self
         self.delegate?.presentMatchmaker(self, viewController: vc)
+    }
+    
+    func joinAvailableGame() {
+        let request = GKMatchRequest()
+        request.minPlayers = 2
+        request.maxPlayers = 5
+        request.inviteMessage = "Yuk main"
+
+        // nyari room random yg lagi proses matchmaking
+        GKMatchmaker.shared().findMatch(for: request) { match, error in
+            if let match = match {
+                self.delegate?.presentGame(self, match: match)
+            }
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -60,11 +77,17 @@ extension GameCenterHelper: GKMatchmakerViewControllerDelegate {
         viewController.dismiss(animated: true)
     }
     
-    func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFailWithError error: Error) {
+    func matchmakerViewController(
+        _ viewController: GKMatchmakerViewController,
+        didFailWithError error: Error
+    ) {
         print(error.localizedDescription)
     }
     
-    func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
+    func matchmakerViewController(
+        _ viewController: GKMatchmakerViewController,
+        didFind match: GKMatch
+    ) {
         viewController.dismiss(animated: true)
         self.delegate?.presentGame(self, match: match)
     }
