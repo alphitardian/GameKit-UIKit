@@ -15,7 +15,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         gameCenter.delegate = self
-        gameCenter.viewController = self
     }
     
     @IBAction func createRoom(_ sender: UIButton) {

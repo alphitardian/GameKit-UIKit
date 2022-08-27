@@ -17,8 +17,6 @@ class GameCenterHelper: NSObject {
     
     static var shared = GameCenterHelper()
     
-    var viewController: UIViewController?
-    
     var delegate: GameCenterHelperDelegate?
     
     var isAuthenticated: Bool {
