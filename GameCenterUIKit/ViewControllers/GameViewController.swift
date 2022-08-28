@@ -85,10 +85,12 @@ extension GameViewController: GKMatchDelegate {
         
         switch state {
         case .unknown:
+            print("unknown")
             DispatchQueue.main.async {
                 self.onlineLabel.text = "Unknown"
             }
         case .connected:
+            // akan connect ketika masuk session sebelumnya melalui notifikasi reconnect
             DispatchQueue.main.async {
                 self.onlineLabel.text = "\(player.displayName) Online"
             }
@@ -100,14 +102,18 @@ extension GameViewController: GKMatchDelegate {
                 self.presentAlert()
             }
         @unknown default:
+            print("default")
             DispatchQueue.main.async {
                 self.onlineLabel.text = "Error"
             }
         }
     }
     
+    // Cuma kepanggil di player yg di invite
+    // kalo auto match ga kepanggil
+    // bakal otomatis gabung ke match sebelumnya, kalo masih ada
     func match(_ match: GKMatch, shouldReinviteDisconnectedPlayer player: GKPlayer) -> Bool {
-        print("kepanggil")
+        print("kepanggil \(player.displayName) \n \(match.players)")
         return true
     }
     
